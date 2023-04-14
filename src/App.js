@@ -8,11 +8,18 @@ import Sign from './pages/auth/Sign';
 const Stack = createNativeStackNavigator();
 
 export default () => {
-  return (
-    <NavigationContainer>
+  const AuthStack = () => {
+    return (
       <Stack.Navigator>
         <Stack.Screen name="LoginPage" component={Login} />
         <Stack.Screen name="SignPage" component={Sign} />
+      </Stack.Navigator>
+    );
+  };
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="AuthStack" component={AuthStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );
