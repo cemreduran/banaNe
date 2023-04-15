@@ -1,12 +1,19 @@
 import React from 'react';
-import {TextInput, Text, View} from 'react-native';
+import {TextInput, View} from 'react-native';
 
 import styles from './Input.style';
 
-const Input = ({placeholder, onChangeText}) => {
+const Input = ({placeholder, onChangeText, value, secureTextEntry}) => {
   return (
     <View style={styles.container}>
-      <TextInput placeholder={placeholder} onChangeText={onChangeText} />
+      <TextInput
+        autoCapitalize="none"
+        placeholder={placeholder}
+        onChangeText={onChangeText}
+        value={value}
+        secureTextEntry={secureTextEntry}
+      />
+      {/* <Icon name={iconName} size={25} color="gray" /> */}
     </View>
   );
 };

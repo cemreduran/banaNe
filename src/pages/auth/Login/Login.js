@@ -1,6 +1,10 @@
-import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, Text} from 'react-native';
 import {Formik} from 'formik';
+import auth from '@react-native-firebase/auth';
+import {showMessage} from 'react-native-flash-message';
+
+import authErrorMessageParser from '../../../utils/authErrorMessageParser';
 
 import styles from './Login.style';
 
@@ -13,12 +17,26 @@ const initialFormValues = {
 };
 
 const Login = ({navigation}) => {
+  const [loading, setLoading] = useState(false);
   function handleSignUp() {
     return navigation.navigate('SignPage');
   }
 
-  function handleFormSubmit(values) {
-    console.log(values);
+  async function handleFormSubmit(formValues) {
+    try {
+      setLoading(true);
+      await auth().signInWithEmailAndPassword(
+        formValues.usermail,
+        formValues.password,
+      );
+      setLoading(false);
+    } catch (error) {
+      showMessage({
+        message: authErrorMessageParser(error.code),
+        type: 'danger',
+      });
+      setLoading(false);
+    }
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -37,9 +55,9 @@ const Login = ({navigation}) => {
               onBlur={handleBlur('password')}
               value={values.password}
               placeholder="Şifrenizi giriniz"
-              secureTextEntry={true} // not work??
+              secureTextEntry={false}
             />
-            <Button text="Giriş Yap" onPress={handleSubmit} />
+            <Button text="Giriş Yap" onPress={handleSubmit} loading={loading} />
           </>
         )}
       </Formik>

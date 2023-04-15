@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, Text} from 'react-native';
 import {Formik} from 'formik';
+import auth from '@react-native-firebase/auth';
 
 import styles from './Sign.style';
 
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
+import {showMessage} from 'react-native-flash-message';
+import authErrorMessageParser from '../../../utils/authErrorMessageParser';
 
 const initialFormValues = {
   usermail: '',
@@ -14,12 +17,38 @@ const initialFormValues = {
 };
 
 function Sign({navigation}) {
+  const [loading, setLoading] = useState(false);
+
   function handleLogin() {
     navigation.goBack();
   }
 
-  function handleFormSubmit(FormValues) {
-    console.log(FormValues);
+  async function handleFormSubmit(formValues) {
+    if (formValues.password !== formValues.repassword) {
+      showMessage({
+        message: 'Şifreler uyuşmuyor',
+        type: 'danger',
+      });
+      return;
+    }
+    try {
+      await auth().createUserWithEmailAndPassword(
+        formValues.usermail,
+        formValues.password,
+      );
+      showMessage({
+        message: 'Kullanıcı oluşturuldu',
+        type: 'success',
+      });
+      navigation.navigate('LoginPage');
+      setLoading(false);
+    } catch (error) {
+      showMessage({
+        message: authErrorMessageParser(error.code),
+        type: 'danger',
+      });
+      setLoading(false);
+    }
   }
 
   return (
@@ -39,16 +68,16 @@ function Sign({navigation}) {
               onBlur={handleBlur('password')}
               value={values.password}
               placeholder="Şifrenizi giriniz"
-              secureTextEntry={true} // not work?
+              secureTextEntry={false}
             />
             <Input
               onChangeText={handleChange('repassword')}
               onBlur={handleBlur('repassword')}
               value={values.repassword}
               placeholder="Şifrenizi tekrar giriniz"
-              secureTextEntry={true} //not work?
+              secureTextEntry={false}
             />
-            <Button text="Giriş Yap" onPress={handleSubmit} />
+            <Button text="Giriş Yap" onPress={handleSubmit} loading={loading} />
           </>
         )}
       </Formik>
