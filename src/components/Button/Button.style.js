@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
 
+import Colors from '../../styles/Colors';
+
 const base_style = StyleSheet.create({
   container: {
     padding: 10,
@@ -23,7 +25,7 @@ export default {
     ...base_style,
     container: {
       ...base_style.container,
-      backgroundColor: '#00897b',
+      backgroundColor: Colors.darkgreen,
     },
     title: {
       ...base_style.title,
@@ -36,12 +38,12 @@ export default {
       ...base_style.container,
       backgroundColor: '#eceff1',
       borderWidth: 1,
-      borderColor: '#00897b',
+      borderColor: Colors.darkgreen,
     },
 
     title: {
       ...base_style.title,
-      color: '#00897b',
+      color: Colors.darkgreen,
     },
   }),
 };
