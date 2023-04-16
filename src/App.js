@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useEffect, useState} from 'react';
-import {View, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import FlashMessage from 'react-native-flash-message';
@@ -11,7 +10,6 @@ import Login from './pages/auth/Login';
 import Sign from './pages/auth/Sign';
 import Messages from './pages/Messages';
 import Colors from './styles/Colors';
-import FloatingButton from './components/FloatingButton';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +24,7 @@ export default () => {
 
   const AuthStack = () => {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="LoginPage" component={Login} />
         <Stack.Screen name="SignPage" component={Sign} />
       </Stack.Navigator>
@@ -34,7 +32,7 @@ export default () => {
   };
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         {!userSession ? (
           <Stack.Screen name="AuthStack" component={AuthStack} />
         ) : (
@@ -42,6 +40,7 @@ export default () => {
             name="MessagesScreen"
             component={Messages}
             options={{
+              headerShown: true,
               title: 'dertler',
               headerTintColor: Colors.darkgreen,
               headerRight: () => (

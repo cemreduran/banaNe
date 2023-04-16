@@ -3,6 +3,9 @@ function authErrorMessageParser(errorCode) {
     case 'auth/invalid-email':
       return 'Geçersiz e-posta adresi';
 
+    case 'auth/email-already-in-use':
+      return 'Bu e-posta adresi zaten alınmış';
+
     case 'auth/email-already-exists':
       return 'Kullanıcı zaten kayıtlı';
 
