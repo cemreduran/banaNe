@@ -30,4 +30,33 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
+  footer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  dislike_container: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    padding: 5,
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dislike_count_container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.darkgreen,
+    borderRadius: 25,
+    padding: 3,
+  },
+  dislike_count_text: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  dislike_text: {
+    color: Colors.darkgreen,
+    fontWeight: 'bold',
+  },
 });
