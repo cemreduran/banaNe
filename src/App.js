@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import FlashMessage from 'react-native-flash-message';
 import auth from '@react-native-firebase/auth';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Login from './pages/auth/Login';
 import Sign from './pages/auth/Sign';
@@ -44,7 +44,7 @@ export default () => {
               title: 'dertler',
               headerTintColor: Colors.darkgreen,
               headerRight: () => (
-                <Icon
+                <MaterialCommunityIcons
                   name="logout"
                   color={Colors.darkgreen}
                   size={28}

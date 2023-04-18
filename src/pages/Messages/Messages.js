@@ -39,7 +39,7 @@ const Messages = () => {
 
     const contentObject = {
       text: content,
-      username: userMail.split('@')[0],
+      username: userMail.split('@')[0], //Make username with userMail in auth.
       date: new Date().toISOString(),
       dislike: 0,
     };
